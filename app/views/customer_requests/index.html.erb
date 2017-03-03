@@ -1,6 +1,12 @@
+<h1>Customer Requests:</h1>
 <table class="table table-hover">
   <thead>
     <tr>
+    <th></th>
+      <th>Distance</th>
+      <th>Address</th>
+      <th>Category</th>
+      <th>Expires</th>
       <% @attributes.each do |attr| %>
         <th><%= attr %></th>
       <% end %>
@@ -9,6 +15,17 @@
   <tbody>
       <% @requests.each do |request| %>
         <tr>
+          <td>
+            <%= link_to "/customer_requests/#{request.id}" do %>
+              <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+            <% end %>
+          </td>
+          <td>
+            <%= request.distance_from([@company.latitude, @company.longitude]) %>
+          </td>
+          <td><%= request.full_street_address %></td>
+          <td><%= request.service_category.name %></td>
+          <td><%= request.expires_date %></td>
           <td><%= request.name %></td>
           <td><%= request.email %></td>
           <td><%= request.phone %></td>
